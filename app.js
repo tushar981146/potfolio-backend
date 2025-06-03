@@ -1,11 +1,16 @@
 // Core Module
 const path = require('path');
 
+
+require('dotenv').config()
+
 // External Module
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const db_path = "mongodb+srv://tushar9811:tushar1234@cluster0.af5ogrx.mongodb.net/Form?retryWrites=true&w=majority&appName=Cluster0";
+const db_path = process.env.DB_PATH;
+
+
 
 //Local Module
 const formDataRouters = require('./routers/formDataRouters');
@@ -22,7 +27,7 @@ app.get('/', (req, res) => {
 
 app.use('/form', formDataRouters);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect(db_path).then(() => {
   console.log('Connected to Mongo');
